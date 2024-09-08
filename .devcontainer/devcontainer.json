@@ -1,0 +1,24 @@
+{
+  "name": "Windows LTSC 2019 DevContainer",
+  "image": "mcr.microsoft.com/windows:ltsc2019",
+  "runArgs": [
+    "--cap-add=NET_ADMIN",
+    "--cap-add=SYS_ADMIN",
+    "--security-opt",
+    "credentialspec=default"
+  ],
+  "remoteUser": "Administrator",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "forwardPorts": [3389],
+  "postStartCommand": "cmd /c net start TermService",
+  "postAttachCommand": "cmd /c echo Working!",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.remote-windows"
+      ]
+    }
+  }
+}
