@@ -1,6 +1,6 @@
 {
   "name": "Windows LTSC 2019 DevContainer",
-  "image": "mcr.microsoft.com/windows:ltsc2019",
+  "image": "mcr.microsoft.com/windows:20h2",
   "runArgs": [
     "--cap-add=NET_ADMIN",
     "--cap-add=SYS_ADMIN",
