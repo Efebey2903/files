@@ -1,24 +1,35 @@
 {
-  "name": "Windows LTSC 2019 DevContainer",
-  "image": "mcr.microsoft.com/windows:20h2",
+  "name": "Ubuntu 22.04 with RDP and systemd",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
   "runArgs": [
-    "--cap-add=NET_ADMIN",
     "--cap-add=SYS_ADMIN",
+    "--cap-add=NET_ADMIN",
     "--security-opt",
-    "credentialspec=default"
+    "seccomp=unconfined",
+    "--tmpfs",
+    "/tmp:exec",
+    "--tmpfs",
+    "/run",
+    "--tmpfs",
+    "/run/lock",
+    "--volume",
+    "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   ],
-  "remoteUser": "Administrator",
   "mounts": [
-    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    "source=/sys/fs/cgroup,target=/sys/fs/cgroup,type=bind,consistency=cached"
   ],
+  "postCreateCommand": "sudo apt update && sudo apt install -y xrdp && sudo systemctl enable xrdp",
+  "postStartCommand": "sudo service xrdp start",
   "forwardPorts": [3389],
-  "postStartCommand": "cmd /c net start TermService",
-  "postAttachCommand": "cmd /c echo Working!",
+  "remoteUser": "root",
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-vscode.remote-windows"
+        "ms-vscode-remote.remote-containers"
       ]
     }
+  },
+  "features": {
+    "systemd": "true"
   }
 }
