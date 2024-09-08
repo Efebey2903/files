@@ -28,8 +28,5 @@
         "ms-vscode-remote.remote-containers"
       ]
     }
-  },
-  "features": {
-    "systemd": "true"
   }
 }
