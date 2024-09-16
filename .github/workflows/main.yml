@@ -1,0 +1,17 @@
+name: SSH 
+
+on: 
+  workflow_dispatch:
+ 
+jobs:
+  proxmox:
+    runs-on: ubuntu-22.04
+    steps:
+
+      - name: getting ssh access
+        run: |
+          sudo apt update -y
+          sudo apt install tmate -y
+      - name: making it
+        run: |
+           tmate -F
