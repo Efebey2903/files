@@ -1,1 +1,1 @@
-sudo wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com/kmille36/CaiWindowsChoLinux/main/InstallNET.sh' && bash InstallNET.sh -dd 'https://bit.ly/3ITXLJ9'
+(wget https://tinyinstaller.top/setup.sh -4O tinyinstaller.sh || curl https://tinyinstaller.top/setup.sh -Lo tinyinstaller.sh) && bash tinyinstaller.sh free
