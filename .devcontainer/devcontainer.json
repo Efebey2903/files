@@ -7,7 +7,7 @@
     "--tmpfs", "/tmp:exec",
     "--tmpfs", "/run",
     "--tmpfs", "/run/lock",
-    "--volume", "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    "--volume", "/sys/fs/cgroup:/sys/fs/cgroup:ro",
     "--volume", "/dev:/dev"
   ],
   "mounts": [
