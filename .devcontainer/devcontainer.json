@@ -1,19 +1,14 @@
 {
-  "name": "Ubuntu 22.04 with RDP and systemd",
+  "name": "Ubuntu 22.04 with RDP, systemd and hostnamectl",
   "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
   "runArgs": [
-    "--cap-add=SYS_ADMIN",
-    "--cap-add=NET_ADMIN",
-    "--security-opt",
-    "seccomp=unconfined",
-    "--tmpfs",
-    "/tmp:exec",
-    "--tmpfs",
-    "/run",
-    "--tmpfs",
-    "/run/lock",
-    "--volume",
-    "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    "--cap-add=ALL", // Needed for systemd
+    "--security-opt", "seccomp=unconfined", // Reduces security, consider alternatives if possible
+    "--tmpfs", "/tmp:exec",
+    "--tmpfs", "/run",
+    "--tmpfs", "/run/lock",
+    "--volume", "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    "--volume", "/dev:/dev"
   ],
   "mounts": [
     "source=/sys/fs/cgroup,target=/sys/fs/cgroup,type=bind,consistency=cached"
@@ -21,7 +16,7 @@
   "postCreateCommand": "sudo apt update && sudo apt install -y xrdp && sudo systemctl enable xrdp",
   "postStartCommand": "sudo service xrdp start",
   "forwardPorts": [3389],
-  "remoteUser": "root",
+  "remoteUser": "vscode", // Avoid using root for remote access
   "customizations": {
     "vscode": {
       "extensions": [
